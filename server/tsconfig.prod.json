@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": false,
+    "outDir": "dist",
+    "target": "es6",
+    "module": "commonjs",
+    "strict": true,                     
+    "baseUrl": "./",                    
+    "esModuleInterop": true,            
+    "skipLibCheck": true,               
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@shared/*": [
+        "src/shared/*"
+      ],
+      "@server": [
+        "src/Server"
+      ]
+    }
+  },
+  "exclude": [
+    "spec",
+    "src/**/*.mock.ts",
+    "src/public/"
+  ],
+  "include": [
+    "src/**/*.ts",
+  ]
+}
