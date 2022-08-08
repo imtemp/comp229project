@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./ui
+    volumes:
+      - angular-data:/ui/dist
+    depends_on:
+      - backend
+
+  backend:
+    restart: always
+    build: ./server
+    env_file: ./production.env
+    volumes:
+      - ./server:/server
+    ports:
+      - "6439:3000"
+
+volumes:
+  angular-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/dist
