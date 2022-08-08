@@ -1,0 +1,20 @@
+<mat-card fxLayoutAlign="center" fxFill fxLayout="column" class="mat-elevation-z3" matBadgePosition="after"
+    matBadgeColor="primary" matBadge="{{position}}">
+    <mat-form-field appearance="outline">
+        <mat-label>Choose the question type</mat-label>
+        <mat-select color="primary" [(ngModel)]="controlType" required>
+            <mat-option *ngFor="let type of controlTypes" [value]="type.key">{{type.value}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div [ngSwitch]="controlType">
+        <app-text-input-builder *ngSwitchCase="'text-input'" [questionPicker]="this"></app-text-input-builder>
+        <app-single-choice-builder *ngSwitchCase="'choice'" [questionPicker]="this"></app-single-choice-builder>
+        <app-datepicker-builder *ngSwitchCase="'datepicker'" [questionPicker]="this"></app-datepicker-builder>
+        <p *ngSwitchCaseDefault>ERROR: QUESTION TYPE IS INVALID {{controlType}}</p>
+    </div>
+    <button mat-flat-button color="warn" class="delete-button" *ngIf="removable" (click)="onDeleteClicked($event)">
+        <mat-icon>delete</mat-icon> Delete
+    </button>
+</mat-card>

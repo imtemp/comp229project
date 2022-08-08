@@ -1,0 +1,10 @@
+<mat-form-field appearance="outline" fxFill>
+    <!-- TODO: input types -->
+    <mat-label>Enter the prompt for this question </mat-label>
+    <input matInput type="text" [(ngModel)]="prompt" required [formControl]="getControl('prompt-input')" />
+</mat-form-field>
+
+<section>
+    <mat-checkbox color="primary" [(ngModel)]="required" [formControl]="getControl('required-cb')">Required
+    </mat-checkbox>
+</section>

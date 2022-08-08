@@ -1,0 +1,15 @@
+/* TODO: dynamically add this for large badges */
+/* ::ng-deep .mat-badge-content {
+    width: auto !important;
+    border-radius: 13px;
+    padding: 1px 5px 1px 5px;
+} */
+.delete-button.mat-flat-button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    margin: 7px;
+    line-height: 14px;
+    min-width: auto;
+}

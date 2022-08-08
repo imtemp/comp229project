@@ -1,0 +1,41 @@
+<div class="content" fxLayoutAlign="center center" fxLayout="column">
+    <h1>Active Surveys</h1>
+    <div class="mat-elevation-z8" style="width: 90%;">
+        <mat-table [dataSource]="dataSource">
+
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                <mat-cell *matCellDef="let survey"> {{survey.title}} </mat-cell>
+            </ng-container>
+
+            <!-- Creator Column -->
+            <ng-container matColumnDef="creator">
+                <mat-header-cell *matHeaderCellDef> Creator </mat-header-cell>
+                <mat-cell *matCellDef="let survey"> {{survey.creator}} </mat-cell>
+            </ng-container>
+
+            <!-- End Date Column -->
+            <ng-container matColumnDef="endDate">
+                <mat-header-cell *matHeaderCellDef> End Date </mat-header-cell>
+                <mat-cell *matCellDef="let survey"> {{survey.endDate}} </mat-cell>
+            </ng-container>
+
+            <!-- Answer button Column -->
+            <ng-container matColumnDef="answer">
+                <mat-header-cell *matHeaderCellDef> Participate </mat-header-cell>
+                <mat-cell *matCellDef="let survey">
+                    <button routerLink="/survey/{{survey.id}}" mat-flat-button color="primary"
+                        [ngClass]="{'btnColor': survey.isEndingSoon}">
+                        Answer
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{'highlight': row.isEndingSoon}">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[10, 15, 25]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

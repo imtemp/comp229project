@@ -1,0 +1,53 @@
+<div fxFlex fxLayout="column">
+  <mat-toolbar color="primary" class="expanded-toolbar">
+    <button mat-icon-button class="image" routerLink="/"
+      [style.backgroundImage]="'url(\'assets/logo/logo_transparent.png\')'"></button>
+
+    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
+      <button mat-button routerLink="/">
+        <mat-icon>home</mat-icon>
+      </button>
+      <button mat-button routerLink="/about">About</button>
+      <button mat-button *ngIf="isAuthenticated" routerLink="/my-surveys">
+        My Surveys
+      </button>
+      <button mat-button *ngIf="isAuthenticated" routerLink="/new-survey">
+        New Survey
+      </button>
+      <button mat-button *ngIf="isAuthenticated" (click)="logout()">
+        Logout
+      </button>
+      <button mat-button *ngIf="!isAuthenticated" routerLink="/login" matTooltip="Log in to update and create surveys">
+        Login
+      </button>
+    </div>
+    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-toolbar>
+  <!-- Mobile version -->
+  <mat-menu x-position="before" #menu="matMenu">
+    <button mat-menu-item routerLink="/">
+      <mat-icon>home</mat-icon> Home
+    </button>
+    <button mat-button routerLink="/about">About</button>
+    <button mat-menu-item *ngIf="isAuthenticated" routerLink="/my-surveys">
+      My Surveys
+    </button>
+    <button mat-menu-item *ngIf="isAuthenticated" routerLink="/new-survey">
+      New Survey
+    </button>
+    <button mat-menu-item *ngIf="!isAuthenticated" routerLink="/login">
+      Login
+    </button>
+    <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
+      Logout
+    </button>
+  </mat-menu>
+  <router-outlet fxFlex></router-outlet>
+  <footer style="margin-top: 10px;">
+    <h5 class="footer mat-h5">
+      &copy;Copyright Team 5 - COMP229 - Centennial College - Fall 2020
+    </h5>
+  </footer>
+</div>

@@ -1,0 +1,122 @@
+<h1 class="mat-h1" style="margin-top: 16px" *ngIf="!existingSurvey">
+  Create a New Survey
+</h1>
+<h1 class="mat-h1" style="margin-top: 16px" *ngIf="existingSurvey">
+  Update Survey
+</h1>
+
+<form
+  fxLayoutAlign="center"
+  class="content"
+  [formGroup]="surveyForm"
+  (ngSubmit)="create()"
+>
+  <mat-card class="survey-card" fxLayout="column" fxFlex="60" fxFill>
+    <mat-card-header
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10"
+    >
+      <mat-form-field class="survey-name" appearance="outline">
+        <mat-label>Survey Name </mat-label>
+        <input
+          matInput
+          type="text"
+          id="surveyName"
+          [formControl]="surveyNameControl"
+          placeholder="Ex. My Awesome Survey"
+        />
+        <mat-error *ngIf="surveyNameControl.hasError('required')">
+          A survey name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <div
+        fxFill
+        fxLayout="row"
+        *ngIf="displayDatePicker"
+        fxLayoutAlign="center center"
+      >
+        <mat-form-field class="survey-name" appearance="outline">
+          <mat-label>End date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="endDatePicker"
+            formControlName="surveyEndDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="endDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #endDatePicker></mat-datepicker>
+          <mat-error *ngIf="!surveyEndDateControl.valid">
+            An ending date is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <button
+        class="end-date-button grey-button"
+        mat-flat-button
+        color=""
+        type="button"
+        (click)="toggleEndDate()"
+        *ngIf="!displayDatePicker"
+      >
+        Add survey ending date
+      </button>
+    </mat-card-header>
+    <mat-card-content fxLayout="column" fxLayoutAlign="center">
+      <app-survey-question-picker
+        [parent]="this"
+        [removable]="false"
+        *ngIf="!existingSurvey || existingSurvey.questions.length == 0"
+      >
+      </app-survey-question-picker>
+      <ng-template #qpInsertionPoint></ng-template>
+    </mat-card-content>
+    <div fxLayoutAlign="center" fxLayout="row" style="margin-top: 7px">
+      <button
+        mat-mini-fab
+        color="primary"
+        class="add-icon"
+        type="button"
+        (click)="createNewQuestionPicker()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+      <button
+        fxFlex="30"
+        color="primary"
+        mat-flat-button
+        type="submit"
+        [disabled]="!surveyForm.valid"
+        *ngIf="!existingSurvey"
+      >
+        Create
+      </button>
+      <button
+        fxFlex="30"
+        color="primary"
+        mat-flat-button
+        type="button"
+        [disabled]="!surveyForm.valid"
+        *ngIf="existingSurvey"
+        (click)="update()"
+      >
+        Update
+      </button>
+      <span>&nbsp;</span>
+      <button
+        fxFlex="30"
+        color="warn"
+        mat-flat-button
+        type="button"
+        *ngIf="existingSurvey"
+        (click)="delete()"
+      >
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

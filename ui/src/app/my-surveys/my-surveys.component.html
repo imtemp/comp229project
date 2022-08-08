@@ -1,0 +1,64 @@
+<div class="content" fxLayoutAlign="center center" fxLayout="column">
+    <h1>{{username}}'s Surveys</h1>
+    <div class="mat-elevation-z8" style="width: 90%;">
+        <mat-table [dataSource]="dataSource">
+
+            <!-- Created Column -->
+            <ng-container matColumnDef="created">
+                <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+                <mat-cell *matCellDef="let survey"> {{getCreatedDate(survey)}} </mat-cell>
+            </ng-container>
+
+            <!-- Title Column -->
+            <ng-container matColumnDef="title">
+                <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+                <mat-cell *matCellDef="let survey"> {{survey.title}} </mat-cell>
+            </ng-container>
+
+            <!-- Stats button Column -->
+            <ng-container matColumnDef="stats">
+                <mat-header-cell *matHeaderCellDef> Stats </mat-header-cell>
+                <mat-cell *matCellDef="let survey">
+                    <button routerLink="/stats/{{survey.id}}" mat-flat-button color="primary">
+                        <mat-icon>bar_chart</mat-icon> Stats
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Responses button Column -->
+            <ng-container matColumnDef="responses">
+                <mat-header-cell *matHeaderCellDef> Responses </mat-header-cell>
+                <mat-cell *matCellDef="let survey">
+                    <button routerLink="/responses/{{survey.id}}" mat-flat-button color="primary">
+                        <mat-icon>assignment</mat-icon> Responses
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Edit button Column -->
+            <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef> Edit </mat-header-cell>
+                <mat-cell *matCellDef="let survey">
+                    <button routerLink="/update/{{survey.id}}" mat-flat-button color="primary">
+                        <mat-icon>edit</mat-icon> Edit
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Delete button Column -->
+            <ng-container matColumnDef="delete">
+                <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+                <mat-cell *matCellDef="let survey">
+                    <button mat-flat-button color="warn" (click)="delete(survey.id)">
+                        <mat-icon>delete</mat-icon> Delete
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

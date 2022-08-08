@@ -1,0 +1,25 @@
+<div fxLayoutAlign="center" class="content" style="margin-top: 20px">
+    <mat-card class="survey-card" fxLayout="column" fxFlex="60" fxFill>
+        <mat-card-header fxLayout="row" fxLayoutAlign="center">
+            <mat-card-title>[{{ survey.title }}] Answer Statistics</mat-card-title>
+        </mat-card-header>
+        <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngFor="let c of charts; let i = index">
+            <mat-card fxLayoutAlign="center" fxFill fxLayout="column" class="mat-elevation-z3" matBadgePosition="after"
+                matBadgeColor="primary" matBadge="{{i + 1}}">
+                Q:
+                <mat-form-field>
+                    <input class="responseInput" matInput [value]="c.question.prompt" disabled />
+                </mat-form-field>
+
+                <canvas baseChart [datasets]="c.data" [labels]="c.labels" [options]="c.options" [legend]="c.legend"
+                    [chartType]="c.type">
+                </canvas>
+            </mat-card>
+        </mat-card-content>
+        <!-- <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+            <button fxFlex="30" color="primary" mat-flat-button type="button" (click)=exportAsJson()>
+                Export as Json
+            </button>
+        </mat-card-actions> -->
+    </mat-card>
+</div>

@@ -1,0 +1,11 @@
+.mat-checkbox.mat-accent .mat-checkbox-inner-container {
+    margin: -10px -100px -100 -100;
+}
+
+::ng-deep .mat-chip.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+::ng-deep .mat-chip-list .cdk-drop-list-dragging {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

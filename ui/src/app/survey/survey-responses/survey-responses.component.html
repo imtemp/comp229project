@@ -1,0 +1,50 @@
+<div class="content" fxLayoutAlign="center center" fxLayout="column">
+    <h1>Responses to {{survey.title}}</h1>
+    <div class="mat-elevation-z8" style="width: 90%;">
+        <mat-table [dataSource]="dataSource">
+
+            <!-- username Column -->
+            <ng-container matColumnDef="username">
+                <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+                <mat-cell *matCellDef="let res"> {{res.username}} </mat-cell>
+            </ng-container>
+
+            <!-- respondent id Column -->
+            <ng-container matColumnDef="respondentId">
+                <mat-header-cell *matHeaderCellDef> RespondentId </mat-header-cell>
+                <mat-cell *matCellDef="let res"> {{res.respondentId}} </mat-cell>
+            </ng-container>
+
+            <!-- submission date Column -->
+            <ng-container matColumnDef="date">
+                <mat-header-cell *matHeaderCellDef> Submission Date </mat-header-cell>
+                <mat-cell *matCellDef="let res"> {{res.date}} </mat-cell>
+            </ng-container>
+
+            <!-- number of answers  Column -->
+            <ng-container matColumnDef="nAnswers">
+                <mat-header-cell *matHeaderCellDef> Number of answers </mat-header-cell>
+                <mat-cell *matCellDef="let res">{{ res.nAnswers }}</mat-cell>
+            </ng-container>
+            <!-- views answers button  Column -->
+            <ng-container matColumnDef="viewAnswers">
+                <mat-header-cell *matHeaderCellDef> View </mat-header-cell>
+                <mat-cell *matCellDef="let res">
+                    <!-- TODO: this -->
+                    <button (click)="openResponse(res.submission)" mat-flat-button color="primary">
+                        <mat-icon>assignment</mat-icon> View
+                    </button>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    <mat-card fxLayout="row" fxLayoutAlign="center" class="mat-elevation-z5" style="width: 90%; margin-top: 5px;">
+        <button fxFlex="30" color="primary" mat-flat-button type="button" (click)=exportAsJson()>
+            Export as Json
+        </button>
+    </mat-card>
+</div>

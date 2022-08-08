@@ -1,0 +1,45 @@
+<form (ngSubmit)="login()" [formGroup]="loginForm" class="container" fxLayoutAlign="center" style="margin-top: 5vh;">
+    <mat-card fxLayout="column" fxFlex="40" fxFlex.lt-sm="80" fxLayoutAlign="center">
+        <mat-card-title fxLayoutAlign="center" *ngIf="!registrationMode">Log In</mat-card-title>
+        <mat-card-title fxLayoutAlign="center" *ngIf="registrationMode">Register</mat-card-title>
+        <mat-card-content fxLayout="column">
+            <mat-form-field appearance="outline">
+                <mat-label for="email">Email</mat-label>
+                <input matInput id="email" type="email" name="email" placeholder="E.g. test@example.com"
+                    [formControl]="email" required>
+                <mat-error *ngIf="email.hasError('required')">
+                    An email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="registrationMode">
+                <mat-label for="username">Username</mat-label>
+                <input matInput id="username" type="text" pattern="[A-Za-z0-9]{3,}" name="username"
+                    placeholder="E.g. SurveyMaker9000" [formControl]="username" required>
+                <mat-error *ngIf="username.hasError('required')">
+                    A username must be at least <strong>3 characters</strong> long
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label for="password">Password</mat-label>
+                <input matInput id="password" name="password" type="password" [formControl]="password" required>
+                <mat-error *ngIf="!password.valid">
+                    A password must be at least <strong>8 characters</strong> long
+                </mat-error>
+            </mat-form-field>
+        </mat-card-content>
+        <!-- Login -->
+        <mat-card-actions fxLayoutAlign="center" fxLayout="row" class="authButtons" *ngIf="!registrationMode">
+            <button mat-flat-button fxFlex="35" class="grey-button">Log in</button>
+            <span fxFlex="15"></span>
+            <button mat-flat-button type="button" color="primary" fxFlex="35"
+                (click)='toggleRegistrationMode()'>Register</button>
+        </mat-card-actions>
+        <!-- Registration -->
+        <mat-card-actions fxLayoutAlign="center" fxLayout="column" class="auth-buttons" *ngIf="registrationMode"
+            fxLayoutGap="5px">
+            <button mat-flat-button type="button" color="primary" fxFlex="80" (click)='register()'>Register</button>
+            <button mat-flat-button type="button" class="grey-button" fxFlex="80" (click)='toggleRegistrationMode()'>Go
+                Back</button>
+        </mat-card-actions>
+    </mat-card>
+</form>

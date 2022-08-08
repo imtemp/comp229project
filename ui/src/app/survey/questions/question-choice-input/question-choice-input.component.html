@@ -1,0 +1,45 @@
+<mat-card-content fxFill [formGroup]="form">
+  <mat-label
+    >{{ question.prompt }}
+    <ng-container *ngIf="question.required">*</ng-container>
+  </mat-label>
+  <mat-divider></mat-divider>
+  <ng-container *ngIf="!multiple">
+    <mat-radio-group
+      style="margin-top: 5px"
+      color="primary"
+      [name]="question.dataName"
+      [formControlName]="question.dataName"
+      [required]="question.required"
+      fxLayoutAlign="right"
+      fxLayout="column"
+      *ngFor="let kv of choices"
+    >
+      <mat-radio-button
+        class="radio-button"
+        [name]="question.dataName"
+        value="{{ kv.key }}"
+        >{{ kv.value }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </ng-container>
+
+  <ng-container *ngIf="multiple">
+    <section
+      *ngFor="let kv of choices; let i = index"
+      [formArrayName]="question.dataName"
+      fxLayoutAlign="left"
+      fxLayout="column"
+    >
+      <mat-checkbox
+        style="margin-top: 5px"
+        color="primary"
+        [formControl]="controlArray.controls[i]"
+        [checked]="false"
+        (change)="onCheckChange($event)"
+        value="{{ kv.key }}"
+        >{{ kv.value }}
+      </mat-checkbox>
+    </section>
+  </ng-container>
+</mat-card-content>

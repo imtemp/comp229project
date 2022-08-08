@@ -1,0 +1,32 @@
+<form
+  fxLayoutAlign="center"
+  class="content"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="form"
+  style="margin-top: 20px"
+>
+  <mat-card class="survey-card" fxLayout="column" fxFlex="60" fxFill>
+    <mat-card-header fxLayout="row" fxLayoutAlign="center">
+      <mat-card-title>{{ survey.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content
+      fxLayout="column"
+      fxLayoutAlign="center"
+      *ngFor="let q of questions"
+    >
+      <app-survey-question-container [question]="q" [form]="form">
+      </app-survey-question-container>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="center">
+      <button
+        fxFlex="30"
+        color="primary"
+        mat-flat-button
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Submit
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

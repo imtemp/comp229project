@@ -1,0 +1,34 @@
+::ng-deep button.mat-menu-item {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: initial;
+  display: block;
+  height: auto;
+  text-align: left;
+  text-decoration: none;
+  position: relative;
+  margin: 0px;
+}
+
+::ng-deep .survey-card {
+  max-width: 90vw !important;
+}
+
+.footer {
+  text-align: center;
+  background-color: #cddc39;
+  margin: 0px;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}

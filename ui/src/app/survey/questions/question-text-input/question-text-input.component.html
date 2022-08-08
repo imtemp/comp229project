@@ -1,0 +1,5 @@
+<mat-form-field appearance="outline" [formGroup]="form" fxFill>
+    <mat-label>{{question.prompt}}</mat-label>
+    <input matInput [formControlName]="question.dataName" [id]="question.dataName" [type]="question.inputType"
+        [required]="question.required">
+</mat-form-field>

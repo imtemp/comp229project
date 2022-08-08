@@ -1,0 +1,23 @@
+<mat-card
+  [ngSwitch]="question.controlType"
+  [formGroup]="form"
+  fxLayoutAlign="center"
+  fxFill
+  fxLayout="column"
+  class="mat-elevation-z3"
+  matBadgePosition="after"
+  matBadgeColor="primary"
+  matBadge="{{ position }}"
+>
+  <!-- A text input question -->
+  <app-question-text-input [parent]="this" *ngSwitchCase="'text-input'">
+  </app-question-text-input>
+
+  <!-- A single choice question -->
+  <app-question-choice-input [parent]="this" *ngSwitchCase="'choice'">
+  </app-question-choice-input>
+
+  <!-- A date input with a datepicker widget -->
+  <app-question-datepicker-input [parent]="this" *ngSwitchCase="'datepicker'">
+  </app-question-datepicker-input>
+</mat-card>

@@ -1,0 +1,62 @@
+<mat-form-field appearance="outline" fxFill>
+  <mat-label>Enter the prompt for this question </mat-label>
+  <input
+    matInput
+    type="text"
+    [(ngModel)]="prompt"
+    required
+    [formControl]="getControl('prompt-input')"
+  />
+</mat-form-field>
+
+<mat-form-field appearance="outline" fxFill>
+  <mat-chip-list
+    class="chip-list"
+    #chipList
+    ngDefaultControl
+    aria-label="Answer selection"
+    [formControl]="getControl('choices-chips')"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <mat-chip
+      class="chip"
+      *ngFor="let choice of choices"
+      [selectable]="selectable"
+      (removed)="remove(choice)"
+      cdkDrag
+    >
+      {{ choice }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+    <input
+      matInput
+      placeholder="Add choices..."
+      [formControl]="getControl('choices-input')"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      [matChipInputAddOnBlur]="addOnBlur"
+      (matChipInputTokenEnd)="add($event)"
+    />
+  </mat-chip-list>
+  <mat-error *ngIf="choices.length < MIN_CHOICES"
+    >At least 2 choices are required.</mat-error
+  >
+</mat-form-field>
+
+<section>
+  <mat-checkbox
+    color="primary"
+    [(ngModel)]="required"
+    [formControl]="getControl('required-cb')"
+    >Required
+  </mat-checkbox>
+  &nbsp;
+  <mat-checkbox
+    color="primary"
+    [(ngModel)]="multiple"
+    [formControl]="getControl('multiple-cb')"
+    >Multiple choices
+  </mat-checkbox>
+</section>

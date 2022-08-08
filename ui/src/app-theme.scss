@@ -1,0 +1,83 @@
+@import "~@angular/material/theming";
+@include mat-core();
+
+$survey-app-primary: mat-palette($mat-lime);
+$survey-app-accent: mat-palette($mat-blue, A200, A100, A400);
+$survey-app-warn: mat-palette($mat-red);
+$custom-typography: mat-typography-config(
+  $font-family: "Roboto, sans-serif",
+);
+$survey-app-theme: mat-light-theme(
+  $survey-app-primary,
+  $survey-app-accent,
+  $survey-app-warn
+);
+
+// Background
+$custom-background-color: #fafafa;
+$background: map-get($survey-app-theme, background);
+$background: map_merge(
+  $background,
+  (
+    background: $custom-background-color,
+  )
+);
+
+// Foreground
+$foreground: (
+  base:              black,
+  divider:           $dark-dividers,
+  dividers:          $dark-dividers,
+  disabled:          $dark-disabled-text,
+  disabled-button:   rgba(black, 0.26),
+  disabled-text:     $dark-disabled-text,
+  elevation:         black,
+  hint-text:         $dark-disabled-text,
+  secondary-text:    $dark-secondary-text,
+  icon:              rgba(black, 0.54),
+  icons:             rgba(black, 0.54),
+  text:              rgba(black, 0.87),
+  slider-min:        rgba(black, 0.87),
+  slider-off:        rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+);
+
+$survey-app-theme: map_merge(
+  $survey-app-theme,
+  (
+    background: $background,
+    foreground: $foreground,
+  )
+);
+
+
+// Snackbar styling
+@mixin snackbar($theme) {
+  $primary: mat-color(map-get($theme, primary));
+  $primary-text: mat-color(map-get($theme, primary), default-contrast);
+  $warn: mat-color(map-get($theme, warn));
+  $warn-text: mat-color(map-get($theme, warn), default-contrast);
+
+  .style-success {
+    color: $primary-text;
+    background-color: $primary;
+  }
+  .style-success .mat-simple-snackbar-action  {
+    color: $primary-text;
+  }
+  .style-error {
+    color: $warn-text;
+    background-color: $warn;
+  }
+  .style-error .mat-simple-snackbar-action {
+    color: $warn-text;
+  }
+}
+
+@include snackbar($survey-app-theme);
+@include angular-material-theme($survey-app-theme);
+@include angular-material-typography($custom-typography);
+
+.grey-button {
+  background-color: #e0e0e0
+}
